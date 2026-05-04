@@ -14,18 +14,18 @@
 
 ## Phase 3 — Iterator Contract
 
-- [ ] `QuestLog` does not expose a public `getQuests()`.
-- [ ] Clients use `QuestIterator`, not `List<Quest>`.
-- [ ] Iterator classes use snapshots instead of the live internal list.
+- [x] `QuestLog` does not expose a public `getQuests()`.
+- [x] Clients use `QuestIterator`, not `List<Quest>`.
+- [x] Iterator classes use snapshots instead of the live internal list.
 
 ## Phase 4 — Concrete Iterators
 
-- [ ] `OrderedQuestIterator.hasNext()` works.
-- [ ] `OrderedQuestIterator.next()` works.
-- [ ] `ReverseQuestIterator.hasNext()` works.
-- [ ] `ReverseQuestIterator.next()` works.
-- [ ] `PriorityQuestIterator.hasNext()` works.
-- [ ] `PriorityQuestIterator.next()` works.
+- [x] `OrderedQuestIterator.hasNext()` works.
+- [x] `OrderedQuestIterator.next()` works.
+- [x] `ReverseQuestIterator.hasNext()` works.
+- [x] `ReverseQuestIterator.next()` works.
+- [x] `PriorityQuestIterator.hasNext()` works.
+- [x] `PriorityQuestIterator.next()` works.
 
 ## Phase 5 — Mediator Contract
 
