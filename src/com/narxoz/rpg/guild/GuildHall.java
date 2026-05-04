@@ -29,6 +29,9 @@ public class GuildHall implements GuildMediator {
             addSubscriber("healing", member);
             addSubscriber("urgent", member);
             addSubscriber("rewards", member);
+            addSubscriber("lore", member);
+            addSubscriber("curse", member);
+            addSubscriber("history", member);
         } else if (member instanceof Quartermaster) {
             addSubscriber("orders", member);
             addSubscriber("supplies", member);
@@ -41,6 +44,13 @@ public class GuildHall implements GuildMediator {
         } else if (member instanceof Healer) {
             addSubscriber("orders", member);
             addSubscriber("healing", member);
+            addSubscriber("urgent", member);
+            addSubscriber("curse", member);
+        } else if (member instanceof Loremaster) {
+            addSubscriber("orders", member);
+            addSubscriber("lore", member);
+            addSubscriber("curse", member);
+            addSubscriber("history", member);
             addSubscriber("urgent", member);
         } else {
             addSubscriber("orders", member);

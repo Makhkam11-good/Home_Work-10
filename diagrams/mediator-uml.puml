@@ -1,0 +1,56 @@
+@startuml
+title Homework 10 - Mediator Pattern
+
+interface GuildMediator {
+  +register(member: GuildMember): void
+  +dispatch(topic: String, from: GuildMember, payload: String): void
+}
+
+class GuildHall {
+  -membersByTopic: Map<String, List<GuildMember>>
+  -messagesRouted: int
+  -membersNotifiedTotal: int
+  -lastDispatchNotifications: int
+  +register(member: GuildMember): void
+  +dispatch(topic: String, from: GuildMember, payload: String): void
+}
+
+abstract class GuildMember {
+  -name: String
+  -mediator: GuildMediator
+  +getName(): String
+  #getMediator(): GuildMediator
+  +receive(topic: String, from: GuildMember, payload: String): void
+}
+
+class Captain {
+  +issueOrder(topic: String, payload: String): void
+}
+
+class Quartermaster {
+  +requestSupplies(topic: String, payload: String): void
+}
+
+class Scout {
+  +reportRoute(topic: String, payload: String): void
+}
+
+class Healer {
+  +prepareAid(topic: String, payload: String): void
+}
+
+class Loremaster {
+  +shareLore(topic: String, payload: String): void
+}
+
+GuildMediator <|.. GuildHall
+GuildMember --> GuildMediator : sends through
+GuildHall o-- GuildMember : topic subscribers
+GuildHall ..> GuildMember : receive()
+GuildMember <|-- Captain
+GuildMember <|-- Quartermaster
+GuildMember <|-- Scout
+GuildMember <|-- Healer
+GuildMember <|-- Loremaster
+
+@enduml

@@ -57,8 +57,8 @@
 
 ## Phase 9 — Final Submission
 
-- [ ] I added `RewardSortedQuestIterator` for Part 4.
-- [ ] I added `Loremaster` for Part 4.
-- [ ] I included 2 UML diagrams.
-- [ ] I removed compiled `.class` files.
-- [ ] I zipped the complete source and docs.
+- [x] I added `RewardSortedQuestIterator` for Part 4.
+- [x] I added `Loremaster` for Part 4.
+- [x] I included 2 UML diagrams.
+- [x] I removed compiled `.class` files.
+- [x] I zipped the complete source and docs.

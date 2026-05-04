@@ -1,0 +1,66 @@
+@startuml
+title Homework 10 - Iterator Pattern
+
+interface QuestIterator {
+  +hasNext(): boolean
+  +next(): Quest
+}
+
+class QuestLog {
+  -quests: List<Quest>
+  +add(quest: Quest): void
+  +size(): int
+  +ordered(): QuestIterator
+  +reverse(): QuestIterator
+  +priorityAtLeast(threshold: QuestPriority): QuestIterator
+  +rewardSorted(): QuestIterator
+  ~snapshot(): List<Quest>
+}
+
+class Quest {
+  -title: String
+  -priority: QuestPriority
+  -rewardGold: int
+  -urgent: boolean
+}
+
+enum QuestPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+class OrderedQuestIterator {
+  -snapshot: List<Quest>
+  -cursor: int
+}
+
+class ReverseQuestIterator {
+  -snapshot: List<Quest>
+  -cursor: int
+}
+
+class PriorityQuestIterator {
+  -snapshot: List<Quest>
+  -cursor: int
+}
+
+class RewardSortedQuestIterator {
+  -snapshot: List<Quest>
+  -cursor: int
+}
+
+QuestLog o-- Quest
+Quest --> QuestPriority
+QuestLog ..> QuestIterator : creates
+QuestIterator <|.. OrderedQuestIterator
+QuestIterator <|.. ReverseQuestIterator
+QuestIterator <|.. PriorityQuestIterator
+QuestIterator <|.. RewardSortedQuestIterator
+OrderedQuestIterator ..> QuestLog : snapshot()
+ReverseQuestIterator ..> QuestLog : snapshot()
+PriorityQuestIterator ..> QuestLog : snapshot()
+RewardSortedQuestIterator ..> QuestLog : snapshot()
+
+@enduml

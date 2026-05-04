@@ -56,6 +56,22 @@ public class CouncilEngine {
                         quest.getTitle() + " needs immediate council attention."
                 );
             }
+
+            if (quest.getTitle().toLowerCase().contains("cursed")) {
+                messagesRouted += dispatch(
+                        hall,
+                        "curse",
+                        quest.getTitle() + " requires a curse review before departure."
+                );
+            }
+
+            if (quest.getTitle().toLowerCase().contains("ruins")) {
+                messagesRouted += dispatch(
+                        hall,
+                        "history",
+                        quest.getTitle() + " should be checked against old guild maps."
+                );
+            }
         }
 
         System.out.println();

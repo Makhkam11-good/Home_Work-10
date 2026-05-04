@@ -6,6 +6,7 @@ import com.narxoz.rpg.council.CouncilRunResult;
 import com.narxoz.rpg.guild.Captain;
 import com.narxoz.rpg.guild.GuildHall;
 import com.narxoz.rpg.guild.Healer;
+import com.narxoz.rpg.guild.Loremaster;
 import com.narxoz.rpg.guild.Quartermaster;
 import com.narxoz.rpg.guild.Scout;
 import com.narxoz.rpg.quest.Quest;
@@ -51,6 +52,7 @@ public class Main {
         Quartermaster quartermaster = new Quartermaster("Oryn the Ledger", hall);
         Scout scout = new Scout("Sayan Swiftstep", hall);
         Healer healer = new Healer("Dana Brightleaf", hall);
+        Loremaster loremaster = new Loremaster("Aisulu Inkseer", hall);
 
         System.out.println();
         System.out.println("Guild officers registered:");
@@ -58,6 +60,7 @@ public class Main {
         System.out.println(" - " + quartermaster.getName() + " (Quartermaster)");
         System.out.println(" - " + scout.getName() + " (Scout)");
         System.out.println(" - " + healer.getName() + " (Healer)");
+        System.out.println(" - " + loremaster.getName() + " (Loremaster)");
 
         System.out.println();
         System.out.println("Mediator warm-up:");
@@ -65,8 +68,10 @@ public class Main {
         scout.reportRoute("scouting", "North road is clear, east bridge needs rope.");
         quartermaster.requestSupplies("supplies", "Rations, rope, and lantern oil are counted.");
         healer.prepareAid("healing", "Potion satchels and bandages are ready.");
+        loremaster.shareLore("lore", "The cursed obelisk appears in pre-guild field notes.");
 
         printTraversal("Quest preview: newest contracts first", questLog.reverse());
+        printTraversal("Quest preview: richest contracts first", questLog.rewardSorted());
 
         CouncilEngine engine = new CouncilEngine();
         CouncilRunResult result = engine.runCouncil(party, questLog, hall);
