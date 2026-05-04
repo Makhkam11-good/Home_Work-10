@@ -2,15 +2,15 @@
 
 ## Phase 1 — Setup
 
-- [ ] I can compile the scaffold with `javac`.
-- [ ] I can run `com.narxoz.rpg.Main`.
-- [ ] I understand which files contain TODOs.
+- [x] I can compile the scaffold with `javac`.
+- [x] I can run `com.narxoz.rpg.Main`.
+- [x] I understand which files contain TODOs.
 
 ## Phase 2 — Quest Model
 
-- [ ] I understand `Quest` fields and getters.
-- [ ] I created at least 5 quests in the demo.
-- [ ] My quests use mixed priorities.
+- [x] I understand `Quest` fields and getters.
+- [x] I created at least 5 quests in the demo.
+- [x] My quests use mixed priorities.
 
 ## Phase 3 — Iterator Contract
 
