@@ -10,7 +10,6 @@ public class Quartermaster extends GuildMember {
     }
 
     public void requestSupplies(String topic, String payload) {
-        // TODO: send a supply-related message through the mediator.
         getMediator().dispatch(topic, this, payload);
     }
 

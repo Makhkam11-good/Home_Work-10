@@ -10,7 +10,6 @@ public class Healer extends GuildMember {
     }
 
     public void prepareAid(String topic, String payload) {
-        // TODO: send a healing message through the mediator.
         getMediator().dispatch(topic, this, payload);
     }
 

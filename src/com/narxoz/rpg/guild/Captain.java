@@ -10,7 +10,6 @@ public class Captain extends GuildMember {
     }
 
     public void issueOrder(String topic, String payload) {
-        // TODO: send a command message through the mediator.
         getMediator().dispatch(topic, this, payload);
     }
 

@@ -14,19 +14,84 @@ public class GuildHall implements GuildMediator {
 
     @Override
     public void register(GuildMember member) {
-        // TODO: add the member to the topic lists it should receive.
+        if (member == null) {
+            return;
+        }
+
+        addSubscriber("general", member);
+
+        if (member instanceof Captain) {
+            addSubscriber("scouting", member);
+            addSubscriber("supplies", member);
+            addSubscriber("healing", member);
+            addSubscriber("urgent", member);
+            addSubscriber("rewards", member);
+        } else if (member instanceof Quartermaster) {
+            addSubscriber("orders", member);
+            addSubscriber("supplies", member);
+            addSubscriber("rewards", member);
+            addSubscriber("urgent", member);
+        } else if (member instanceof Scout) {
+            addSubscriber("orders", member);
+            addSubscriber("scouting", member);
+            addSubscriber("urgent", member);
+        } else if (member instanceof Healer) {
+            addSubscriber("orders", member);
+            addSubscriber("healing", member);
+            addSubscriber("urgent", member);
+        } else {
+            addSubscriber("orders", member);
+            addSubscriber("urgent", member);
+        }
     }
 
     @Override
     public void dispatch(String topic, GuildMember from, String payload) {
-        // TODO: notify registered members for the topic without direct colleague calls.
+        String normalizedTopic = normalizeTopic(topic);
+        String senderName = from == null ? "GuildHall" : from.getName();
+        String message = payload == null ? "" : payload;
+        int notified = 0;
+
+        System.out.printf("[GuildHall] %s dispatches '%s': %s%n", senderName, normalizedTopic, message);
+
+        for (GuildMember member : subscribersFor(normalizedTopic)) {
+            if (member == from) {
+                System.out.printf("[GuildHall] skipping sender %s%n", member.getName());
+                continue;
+            }
+
+            System.out.printf("[GuildHall] -> notifying %s%n", member.getName());
+            member.receive(normalizedTopic, from, message);
+            notified++;
+        }
+
+        if (notified == 0) {
+            System.out.printf("[GuildHall] no other subscribers for '%s'%n", normalizedTopic);
+        }
     }
 
     protected void addSubscriber(String topic, GuildMember member) {
-        membersByTopic.computeIfAbsent(topic, key -> new ArrayList<>()).add(member);
+        if (member == null) {
+            return;
+        }
+
+        List<GuildMember> subscribers = membersByTopic.computeIfAbsent(
+                normalizeTopic(topic),
+                key -> new ArrayList<>()
+        );
+        if (!subscribers.contains(member)) {
+            subscribers.add(member);
+        }
     }
 
     protected List<GuildMember> subscribersFor(String topic) {
-        return membersByTopic.getOrDefault(topic, List.of());
+        return membersByTopic.getOrDefault(normalizeTopic(topic), List.of());
+    }
+
+    private String normalizeTopic(String topic) {
+        if (topic == null || topic.isBlank()) {
+            return "general";
+        }
+        return topic.trim().toLowerCase();
     }
 }

@@ -29,16 +29,16 @@
 
 ## Phase 5 — Mediator Contract
 
-- [ ] Concrete guild members do not store references to other concrete members.
-- [ ] Concrete guild members use `getMediator().dispatch(...)` for outbound messages.
-- [ ] No concrete guild member directly calls another member's `receive(...)`.
+- [x] Concrete guild members do not store references to other concrete members.
+- [x] Concrete guild members use `getMediator().dispatch(...)` for outbound messages.
+- [x] No concrete guild member directly calls another member's `receive(...)`.
 
 ## Phase 6 — Guild Hall
 
-- [ ] `GuildHall.register(...)` assigns members to useful topics.
-- [ ] `GuildHall.dispatch(...)` finds subscribers by topic.
-- [ ] The sender is handled intentionally, either skipped or clearly included.
-- [ ] Dispatch behavior is visible in console output.
+- [x] `GuildHall.register(...)` assigns members to useful topics.
+- [x] `GuildHall.dispatch(...)` finds subscribers by topic.
+- [x] The sender is handled intentionally, either skipped or clearly included.
+- [x] Dispatch behavior is visible in console output.
 
 ## Phase 7 — Colleagues
 

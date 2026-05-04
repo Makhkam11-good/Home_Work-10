@@ -10,7 +10,6 @@ public class Scout extends GuildMember {
     }
 
     public void reportRoute(String topic, String payload) {
-        // TODO: send a scouting message through the mediator.
         getMediator().dispatch(topic, this, payload);
     }
 
