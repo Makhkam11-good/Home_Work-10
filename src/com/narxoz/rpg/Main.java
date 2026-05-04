@@ -1,7 +1,15 @@
 package com.narxoz.rpg;
 
 import com.narxoz.rpg.combatant.Hero;
+import com.narxoz.rpg.council.CouncilEngine;
+import com.narxoz.rpg.council.CouncilRunResult;
+import com.narxoz.rpg.guild.Captain;
+import com.narxoz.rpg.guild.GuildHall;
+import com.narxoz.rpg.guild.Healer;
+import com.narxoz.rpg.guild.Quartermaster;
+import com.narxoz.rpg.guild.Scout;
 import com.narxoz.rpg.quest.Quest;
+import com.narxoz.rpg.quest.QuestIterator;
 import com.narxoz.rpg.quest.QuestLog;
 import com.narxoz.rpg.quest.QuestPriority;
 import java.util.List;
@@ -38,10 +46,34 @@ public class Main {
         addQuest(questLog, new Quest("Map the Frostwood Ruins", QuestPriority.NORMAL, 210, false));
         System.out.println("Total quests in log: " + questLog.size());
 
-        // 3. Register at least 4 GuildMembers (Quartermaster, Scout, Healer, Captain) on the GuildHall.
-        // 4. Iterate the quest log with at least 2 different QuestIterator implementations.
-        // 5. Dispatch coordinating messages through the mediator during quest planning.
-        // 6. Run the CouncilEngine and print a final CouncilRunResult.
+        GuildHall hall = new GuildHall();
+        Captain captain = new Captain("Captain Mira", hall);
+        Quartermaster quartermaster = new Quartermaster("Oryn the Ledger", hall);
+        Scout scout = new Scout("Sayan Swiftstep", hall);
+        Healer healer = new Healer("Dana Brightleaf", hall);
+
+        System.out.println();
+        System.out.println("Guild officers registered:");
+        System.out.println(" - " + captain.getName() + " (Captain)");
+        System.out.println(" - " + quartermaster.getName() + " (Quartermaster)");
+        System.out.println(" - " + scout.getName() + " (Scout)");
+        System.out.println(" - " + healer.getName() + " (Healer)");
+
+        System.out.println();
+        System.out.println("Mediator warm-up:");
+        captain.issueOrder("orders", "Open the war council and ready every station.");
+        scout.reportRoute("scouting", "North road is clear, east bridge needs rope.");
+        quartermaster.requestSupplies("supplies", "Rations, rope, and lantern oil are counted.");
+        healer.prepareAid("healing", "Potion satchels and bandages are ready.");
+
+        printTraversal("Quest preview: newest contracts first", questLog.reverse());
+
+        CouncilEngine engine = new CouncilEngine();
+        CouncilRunResult result = engine.runCouncil(party, questLog, hall);
+
+        System.out.println();
+        System.out.println("Final council result:");
+        System.out.println(result);
     }
 
     private static void addQuest(QuestLog questLog, Quest quest) {
@@ -53,5 +85,14 @@ public class Main {
                 quest.getRewardGold(),
                 quest.isUrgent()
         );
+    }
+
+    private static void printTraversal(String title, QuestIterator iterator) {
+        System.out.println();
+        System.out.println(title);
+        while (iterator.hasNext()) {
+            Quest quest = iterator.next();
+            System.out.printf(" - %s [%s]%n", quest.getTitle(), quest.getPriority());
+        }
     }
 }

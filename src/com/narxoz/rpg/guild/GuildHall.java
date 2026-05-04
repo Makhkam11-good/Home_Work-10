@@ -11,6 +11,9 @@ import java.util.Map;
 public class GuildHall implements GuildMediator {
 
     private final Map<String, List<GuildMember>> membersByTopic = new HashMap<>();
+    private int messagesRouted;
+    private int membersNotifiedTotal;
+    private int lastDispatchNotifications;
 
     @Override
     public void register(GuildMember member) {
@@ -51,6 +54,7 @@ public class GuildHall implements GuildMediator {
         String senderName = from == null ? "GuildHall" : from.getName();
         String message = payload == null ? "" : payload;
         int notified = 0;
+        messagesRouted++;
 
         System.out.printf("[GuildHall] %s dispatches '%s': %s%n", senderName, normalizedTopic, message);
 
@@ -68,6 +72,8 @@ public class GuildHall implements GuildMediator {
         if (notified == 0) {
             System.out.printf("[GuildHall] no other subscribers for '%s'%n", normalizedTopic);
         }
+        lastDispatchNotifications = notified;
+        membersNotifiedTotal += notified;
     }
 
     protected void addSubscriber(String topic, GuildMember member) {
@@ -86,6 +92,18 @@ public class GuildHall implements GuildMediator {
 
     protected List<GuildMember> subscribersFor(String topic) {
         return membersByTopic.getOrDefault(normalizeTopic(topic), List.of());
+    }
+
+    public int getMessagesRouted() {
+        return messagesRouted;
+    }
+
+    public int getMembersNotifiedTotal() {
+        return membersNotifiedTotal;
+    }
+
+    public int getLastDispatchNotifications() {
+        return lastDispatchNotifications;
     }
 
     private String normalizeTopic(String topic) {

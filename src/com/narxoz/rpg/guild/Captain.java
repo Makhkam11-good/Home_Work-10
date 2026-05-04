@@ -15,6 +15,31 @@ public class Captain extends GuildMember {
 
     @Override
     public void receive(String topic, GuildMember from, String payload) {
-        // TODO: react to a guild-hall message without calling another colleague directly.
+        String sender = senderName(from);
+
+        switch (topic) {
+            case "scouting":
+                System.out.printf("[%s] updates the battle map from %s's scout report: %s%n", getName(), sender, payload);
+                break;
+            case "supplies":
+                System.out.printf("[%s] adjusts the marching plan after %s reports supplies: %s%n", getName(), sender, payload);
+                break;
+            case "healing":
+                System.out.printf("[%s] sets the rest schedule after %s reports aid: %s%n", getName(), sender, payload);
+                break;
+            case "urgent":
+                System.out.printf("[%s] calls the table to attention after %s warns: %s%n", getName(), sender, payload);
+                break;
+            case "rewards":
+                System.out.printf("[%s] weighs reward risk after %s reports: %s%n", getName(), sender, payload);
+                break;
+            default:
+                System.out.printf("[%s] acknowledges %s's message on %s: %s%n", getName(), sender, topic, payload);
+                break;
+        }
+    }
+
+    private String senderName(GuildMember from) {
+        return from == null ? "GuildHall" : from.getName();
     }
 }

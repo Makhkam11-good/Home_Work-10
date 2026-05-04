@@ -42,18 +42,18 @@
 
 ## Phase 7 — Colleagues
 
-- [ ] `Quartermaster.receive(...)` has meaningful behavior.
-- [ ] `Scout.receive(...)` has meaningful behavior.
-- [ ] `Healer.receive(...)` has meaningful behavior.
-- [ ] `Captain.receive(...)` has meaningful behavior.
-- [ ] Each colleague has one outbound convenience method.
+- [x] `Quartermaster.receive(...)` has meaningful behavior.
+- [x] `Scout.receive(...)` has meaningful behavior.
+- [x] `Healer.receive(...)` has meaningful behavior.
+- [x] `Captain.receive(...)` has meaningful behavior.
+- [x] Each colleague has one outbound convenience method.
 
 ## Phase 8 — Engine and Demo
 
-- [ ] `CouncilEngine` uses at least 2 iterators.
-- [ ] `CouncilEngine` dispatches messages through `GuildMediator`.
-- [ ] `CouncilRunResult` reports useful counters.
-- [ ] `Main.java` prints a readable start-to-finish demo.
+- [x] `CouncilEngine` uses at least 2 iterators.
+- [x] `CouncilEngine` dispatches messages through `GuildMediator`.
+- [x] `CouncilRunResult` reports useful counters.
+- [x] `Main.java` prints a readable start-to-finish demo.
 
 ## Phase 9 — Final Submission
 
